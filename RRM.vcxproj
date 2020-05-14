@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FB855C63-3F88-4FE6-AB1A-2914CC65E758}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RRM</RootNamespace>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <PluginName>RRM</PluginName>
+    <PluginVersion>1.0</PluginVersion>
+    <TechlogVersion>2018.1</TechlogVersion>
+    <VendorName>IPGG SB RAS</VendorName>
+    <TechlogSDKHome>C:\Program Files\Schlumberger\Ocean for Techlog 2018.1\</TechlogSDKHome>
+    <QtVersion>5.9.1</QtVersion>
+    <QtDir>$(TechlogSDKHome)\3rdparty\$(PlatformToolset)\Qt $(QtVersion)</QtDir>
+    <MocUserSettings>-DQT_NO_DEBUG -D_WINDOWS -DUNICODE -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -I"$(QTDIR)\include" -I"$(QTDIR)\include\QtCore" -I"$(QTDIR)\include\QtGui" -I"$(QTDIR)\include\QtPrintSupport" -I"$(QTDIR)\include\QtWidgets" -I"$(QTDIR)\include\QtXml" -I"$(TechlogSDKHome)\include" -I"include"</MocUserSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="RRM_Plugin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RRM_Plugin.h" />
+    <ClCompile Include="RRM_Plugin_precompiled.h" >
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(NOINHERIT)</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(NOINHERIT)</PrecompiledHeaderFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ocean.png" />
+  </ItemGroup>
+  
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>RRM_Plugin_precompiled.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>RRM_Plugin_precompiled.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN32PROJECT5_EXPORTS;PLUGIN_VENDOR_NAME="$(VendorName)";PLUGIN_VERSION="$(PluginVersion)";PLUGIN_NAME="$(PluginName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;$(TechlogSDKHome)\include;$(VC_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputFile>$(OutDir)$(TargetName)D$(TargetExt)</OutputFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(TechlogSDKHome)\lib\$(PlatformToolset);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;Qt5Xmld.lib;Slb.Techlog.Ocean.Runtime64D$(PlatformToolset).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>1.0</Version>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+        mkdir "$(TLUSERDIR)\Extensions\$(VendorName)\$(PluginName)\$(Techlogversion)\$(PluginVersion)"
+        xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(TLUSERDIR)\Extensions\$(VendorName)\$(PluginName)\$(Techlogversion)\$(PluginVersion)" /Y
+        xcopy "$(ProjectDir)ocean.png" "$(TLUSERDIR)\Extensions\$(VendorName)\$(PluginName)\$(Techlogversion)\$(PluginVersion)" /Y
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>RRM_Plugin_precompiled.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>RRM_Plugin_precompiled.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NOMINMAX;WIN32_LEAN_AND_MEAN;QT_NO_DEBUG;_WINDOWS;UNICODE;QT_THREAD_SUPPORT;WIN32;WIN64;QT_GUI_LIB;QT_WIDGETS_LIB;QT_CORE_LIB;PLUGIN_VENDOR_NAME="$(VendorName)";PLUGIN_VERSION="$(PluginVersion)";PLUGIN_NAME="$(PluginName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtXml;$(TechlogSDKHome)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(TechlogSDKHome)\lib\$(PlatformToolset);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;Qt5Xml.lib;Slb.Techlog.Ocean.Runtime64$(PlatformToolset).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>1.0</Version>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+        mkdir "$(TLUSERDIR)\Extensions\$(VendorName)\$(PluginName)\$(Techlogversion)\$(PluginVersion)"
+        xcopy "$(OutDir)$(TargetName)$(TargetExt)" "$(TLUSERDIR)\Extensions\$(VendorName)\$(PluginName)\$(Techlogversion)\$(PluginVersion)" /Y
+        xcopy "$(ProjectDir)ocean.png" "$(TLUSERDIR)\Extensions\$(VendorName)\$(PluginName)\$(Techlogversion)\$(PluginVersion)" /Y
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+  <ImportGroup Label="ExtensionTargets" />
+  
+  <PropertyGroup>
+    <OceanTargetsPath>C:\Program Files\Common Files\Schlumberger\Ocean\Techlog\Common Components</OceanTargetsPath>
+  </PropertyGroup>
+
+  <Import Project="$(OceanTargetsPath)\Ocean.Techlog.targets" Condition="Exists('$(OceanTargetsPath)\Ocean.Techlog.targets')" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(TechlogSDKHome)\bin\OceanForTechlog.targets" />
+</Project>
